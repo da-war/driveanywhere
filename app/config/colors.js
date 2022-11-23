@@ -1,0 +1,17 @@
+export default {
+  primary: "#07BEF8",
+  secondary: "#25C30C",
+  black: "#000",
+  white: "#fff",
+  medium: "#6e6969",
+  light: "#f8f4f4",
+  dark: "#0c0c0c",
+  danger: "#ff5252",
+  iconic: "##97A6BA",
+  facebook: "#3b5998",
+  googlePlus: "#dd4b39",
+  twitter: "#00acee",
+  gray: "#74858C",
+  appBg: "#FBFDFE",
+  border: "#F2F6FA",
+};

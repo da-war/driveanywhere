@@ -1,0 +1,165 @@
+[debug] [2022-11-08T00:51:03.572Z] ----------------------------------------------------------------------
+[debug] [2022-11-08T00:51:03.574Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Cyber World\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only functions
+[debug] [2022-11-08T00:51:03.575Z] CLI Version:   11.16.0
+[debug] [2022-11-08T00:51:03.575Z] Platform:      win32
+[debug] [2022-11-08T00:51:03.575Z] Node Version:  v16.16.0
+[debug] [2022-11-08T00:51:03.582Z] Time:          Tue Nov 08 2022 05:51:03 GMT+0500 (Pakistan Standard Time)
+[debug] [2022-11-08T00:51:03.583Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-08T00:51:03.814Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-08T00:51:03.815Z] > authorizing via signed-in user (imdawar090@gmail.com)
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[debug] [2022-11-08T00:51:03.921Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2022-11-08T00:51:03.921Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2022-11-08T00:51:03.954Z] [hub] writing locator at C:\Users\CYBERW~1\AppData\Local\Temp\hub-driveanywhere-daab0.json
+[debug] [2022-11-08T00:51:04.084Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2022-11-08T00:51:04.085Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2022-11-08T00:51:04.085Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, firestore, database, hosting, pubsub, storage {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, firestore, database, hosting, pubsub, storage\u001b[22m"}}
+[info] +  functions: Using node@16 from host. {"metadata":{"emulator":{"name":"functions"},"message":"Using node@16 from host."}}
+[debug] [2022-11-08T00:51:04.211Z] defaultcredentials: writing to file C:\Users\Cyber World\AppData\Roaming\firebase\imdawar090_gmail_com_application_default_credentials.json
+[debug] [2022-11-08T00:51:04.221Z] Setting GAC to C:\Users\Cyber World\AppData\Roaming\firebase\imdawar090_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\Cyber World\\AppData\\Roaming\\firebase\\imdawar090_gmail_com_application_default_credentials.json"}}
+[debug] [2022-11-08T00:51:04.223Z] > refreshing access token with scopes: []
+[debug] [2022-11-08T00:51:04.229Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-11-08T00:51:04.230Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-08T00:51:04.900Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2022-11-08T00:51:04.900Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-08T00:51:04.919Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/driveanywhere-daab0/adminSdkConfig [none]
+[debug] [2022-11-08T00:51:05.892Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/driveanywhere-daab0/adminSdkConfig 200
+[debug] [2022-11-08T00:51:05.892Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/driveanywhere-daab0/adminSdkConfig {"projectId":"driveanywhere-daab0","storageBucket":"driveanywhere-daab0.appspot.com","locationId":"us-central"}
+[debug] [2022-11-08T00:51:05.933Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2022-11-08T00:51:05.933Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2022-11-08T00:51:05.934Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Cyber World\\.cache\\firebase\\emulators\\ui-v1.11.1\\server\\server.js"],"optionalArgs":[],"joinArgs":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Cyber World\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.11.1\\\\server\\\\server.js\"],\"optionalArgs\":[],\"joinArgs\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2022-11-08T00:51:06.202Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2022-11-08T00:51:06.203Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[info] i  functions: Watching "C:\Users\Cyber World\desktop\DA\DriveAnywhere\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"C:\\Users\\Cyber World\\desktop\\DA\\DriveAnywhere\\functions\" for Cloud Functions..."}}
+[debug] [2022-11-08T00:51:06.221Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] !  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2022-11-08T00:51:10.845Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.18.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2022-11-08T00:51:10.846Z] Building nodejs source
+[debug] [2022-11-08T00:51:10.846Z] Analyzing nodejs backend spec
+[debug] [2022-11-08T00:51:10.849Z] Could not find functions.yaml. Must use http discovery
+[debug] [2022-11-08T00:51:11.361Z] Serving at port 9005
+
+[debug] [2022-11-08T00:51:11.476Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2022-11-08T00:51:11.491Z] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: . {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: ."}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬────────────────┬─────────────────────────────────┐
+│ Emulator  │ Host:Port      │ View in Emulator UI             │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Functions │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions │
+└───────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2022-11-08T00:52:20.015Z] File C:\Users\Cyber World\desktop\DA\DriveAnywhere\functions\index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Cyber World\\desktop\\DA\\DriveAnywhere\\functions\\index.js changed, reloading triggers"}}
+[debug] [2022-11-08T00:52:21.025Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] !  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2022-11-08T00:52:31.442Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.18.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2022-11-08T00:52:31.442Z] Building nodejs source
+[debug] [2022-11-08T00:52:31.442Z] Analyzing nodejs backend spec
+[debug] [2022-11-08T00:52:31.444Z] Could not find functions.yaml. Must use http discovery
+[debug] [2022-11-08T00:52:32.013Z] Serving at port 9005
+
+[debug] [2022-11-08T00:52:32.039Z] Got response from /__/functions.yaml Failed to generate manifest from function source: SyntaxError: Unexpected end of input
+[debug] [2022-11-08T00:52:32.043Z] Failed to parse functions.yamlincomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 62:
+     ... rom function source: SyntaxError: Unexpected end of input
+                                         ^ {"name":"YAMLException","reason":"incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line","mark":{"name":null,"buffer":"Failed to generate manifest from function source: SyntaxError: Unexpected end of input\n\u0000","position":61,"line":0,"column":61},"message":"incomplete explicit mapping pair; a key node is missed; or followed by a non-tabulated empty line at line 1, column 62:\n     ... rom function source: SyntaxError: Unexpected end of input\n                                         ^"}
+[debug] [2022-11-08T00:52:32.048Z] shutdown requested via /__/quitquitquit
+
+[error] !!  functions: Failed to load function definition from source: FirebaseError: Failed to load function definition from source: Failed to generate manifest from function source: SyntaxError: Unexpected end of input {"metadata":{"emulator":{"name":"functions"},"message":"Failed to load function definition from source: FirebaseError: Failed to load function definition from source: Failed to generate manifest from function source: SyntaxError: Unexpected end of input"}}
+[debug] [2022-11-08T00:55:26.736Z] File C:\Users\Cyber World\desktop\DA\DriveAnywhere\functions\index.js changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Cyber World\\desktop\\DA\\DriveAnywhere\\functions\\index.js changed, reloading triggers"}}
+[debug] [2022-11-08T00:55:27.755Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[warn] !  functions: Please note that there will be breaking changes when you upgrade. 
+[debug] [2022-11-08T00:55:33.616Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "16"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.18.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0"
+  },
+  "private": true
+}
+[debug] [2022-11-08T00:55:33.616Z] Building nodejs source
+[debug] [2022-11-08T00:55:33.617Z] Analyzing nodejs backend spec
+[debug] [2022-11-08T00:55:33.618Z] Could not find functions.yaml. Must use http discovery
+[debug] [2022-11-08T00:55:34.251Z] Serving at port 9005
+
+[debug] [2022-11-08T00:55:34.271Z] Got response from /__/functions.yaml {"endpoints":{},"specVersion":"v1alpha1","requiredAPIs":[]}
+[debug] [2022-11-08T00:55:34.278Z] shutdown requested via /__/quitquitquit
+
+[info] +  functions: Loaded functions definitions from source: . {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: ."}}
+[debug] [2022-11-08T01:58:14.869Z] Received signal SIGHUP 1
