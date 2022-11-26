@@ -14,9 +14,19 @@ const DriverRequests = () => {
 
   //get all the requests where status is pending
   //function that returns all the requests where status is pending
-  const pendingRequests = requests.filter(
-    (request) => request.status === "pending"
-  );
+
+  React.useEffect(() => {
+    getData();
+    console.log("here is my requests", myRequests);
+    console.log("here is requests", requests);
+  }, []);
+
+  const getData = () => {
+    const myRequests = requests.filter(
+      (request) => request.status === "pending"
+    );
+    setMyRequests(myRequests);
+  };
 
   return (
     <AppScreen>
@@ -24,7 +34,7 @@ const DriverRequests = () => {
       <Text style={styles.titleText}>All Driver Requests</Text>
       <View style={styles.listContainer}>
         <FlatList
-          data={pendingRequests}
+          data={myRequests}
           keyExtractor={(item) => item.toString()}
           renderItem={({ item }) => (
             <RequestCard

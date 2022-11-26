@@ -7,7 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "notification": {
-      "icon": "./assets/icon.png"
+      "icon": "./assets/notify.png"
     },
     "splash": {
       "image": "./assets/splash.png",
@@ -22,14 +22,17 @@
       "supportsTablet": true,
       "infoPlist": {
         "UIBackgroundModes": ["remote-notification"]
-      }
+      },
+      "bundleIdentifier": "host.exp.Exponent"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.ranadawar.DriveAnywhere"
+      "googleServicesFile": "./google-services.json",
+      "package": "com.ranadawar.DriveAnywhere",
+      "useNextNotificationsApi": true
     },
     "web": {
       "favicon": "./assets/favicon.png"

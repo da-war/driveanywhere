@@ -14,7 +14,7 @@ const RequestsProvider = ({ children }) => {
 
   const getRequests = async () => {
     try {
-      const q = query(collection(db, "requests"));
+      const q = query(collection(db, "drequests"));
       const querySnapshot = await getDocs(q);
       const requests = querySnapshot.docs.map((doc) => doc.data());
       setRequests(requests);

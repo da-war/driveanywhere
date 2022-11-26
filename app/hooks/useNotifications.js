@@ -2,6 +2,7 @@ import React from "react";
 
 import * as Notifications from "expo-notifications";
 import Constants from "expo-constants";
+import * as Device from "expo-device";
 import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { Alert } from "react-native";

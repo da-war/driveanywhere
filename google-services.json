@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "641696592812",
+    "project_id": "driveanywhere-daab0",
+    "storage_bucket": "driveanywhere-daab0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:641696592812:android:3043ce35167974ee0a4009",
+        "android_client_info": {
+          "package_name": "host.exp.Exponent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "641696592812-9gfr9k55dquqru8kkg4t9oib854h5ttg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYzQwqoqQs2XFm9PO6x8lok7e8xh1-Ssc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "641696592812-9gfr9k55dquqru8kkg4t9oib854h5ttg.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "641696592812-gi6op9hirm8mnvvd2h1mpcivqi0jseto.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "host.exp.exponent"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

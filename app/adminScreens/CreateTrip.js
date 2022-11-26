@@ -38,10 +38,11 @@ import {
   getTime,
   showRideSendNotification,
 } from "../globalFunctions/global";
-import { sendNotification } from "../api/expoPushTokens";
 import AppFormDatePicker from "../components/forms/AppFormDatePicker";
 import AppFormTimePicker from "../components/forms/AppFormTimePicker";
 import moment from "moment";
+import { expoPushyNotification } from "../globalFunctions/notifications";
+import { sendNotification } from "../api/expoPushTokens";
 
 const initialValues = {
   arrivalLocation: "",
@@ -192,14 +193,13 @@ const CreateTrip = ({ navigation }) => {
           console.log("hehehehehehehehhehehehehehehehhehehehehe", trips);
           Alert.alert("Success", "Trip Assigned Successfully");
           showRideSendNotification();
-          const bodyRequest = "You received a ride request Ride ID: " + newId;
+          const bodyRequest = "You received a ride request Trip ID: " + newId;
           const message = {
-            to: driver.token,
+            to: data.driver.token,
             sound: "default",
-            title: "Driver Anywhere",
+            title: "Ride Request",
             body: bodyRequest,
             data: { data: "goes here" },
-            _displayInForeground: true,
           };
           sendNotification(message);
           navigation.navigate("adminHome");
