@@ -37,7 +37,7 @@ const HomeScreen = () => {
                 <View style={styles.twoCardContainer}>
                   <AdminCard
                     source={require("../../assets/icons/rides.png")}
-                    title="All Rides"
+                    title="Active Rides"
                     onPress={() => navigation.navigate("adminRides")}
                   />
                   <AdminCard
@@ -54,7 +54,7 @@ const HomeScreen = () => {
                   />
                   <AdminCard
                     source={require("../../assets/icons/report.png")}
-                    title="Get Reports"
+                    title="Completed Rides"
                     onPress={() => navigation.navigate("adminmycomplete")}
                   />
                 </View>

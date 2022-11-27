@@ -73,7 +73,7 @@ const RequestedRides = () => {
             sound: "default",
             title: "Driver Anywhere",
             body: bodyRequest,
-            data: { data: "goes here" },
+            data: { route: "accepted" },
             _displayInForeground: true,
           };
           sendNotification(message);
@@ -106,7 +106,7 @@ const RequestedRides = () => {
             sound: "default",
             title: "Driver Anywhere",
             body: bodyRequest,
-            data: { data: "goes here" },
+            data: { route: "rejected" },
             _displayInForeground: true,
           };
           sendNotification(message);

@@ -78,7 +78,7 @@ export function CommentsScreen({ route }) {
           const message = {
             to: token,
             sound: "default",
-            title: "Driver Anywhere",
+            title: "Drive Anywhere",
             body: bodyRequest,
             data: { route: "inProgress" },
             _displayInForeground: true,
@@ -92,7 +92,7 @@ export function CommentsScreen({ route }) {
           const message = {
             to: token,
             sound: "default",
-            title: "Driver Anywhere",
+            title: "Drive Anywhere",
             body: bodyRequest,
             data: { route: "inprogress" },
             _displayInForeground: true,

@@ -7,6 +7,7 @@ import AdminStackNavigator from "./AdminStackNavigator";
 
 import AppIcon from "../../components/AppIcon";
 import { COLORS } from "../../constants/index";
+import useNotifications from "../../hooks/useNotifications";
 
 const Tab = createBottomTabNavigator();
 

@@ -8,6 +8,7 @@ import { auth, db } from "../../firebase";
 import { Alert } from "react-native";
 
 import navigation from "../navigation/rootNavigation";
+import { StateContext } from "../context/StateContext";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -19,24 +20,60 @@ Notifications.setNotificationHandler({
 
 export default useNotifications = (notificationListener) => {
   const notiResponseListener = React.useRef();
+  const { state, setState } = React.useContext(StateContext);
   const lastNotificationResponse = Notifications.useLastNotificationResponse();
   React.useEffect(() => {
     registerForPushNotificationsAsync();
 
     notiResponseListener.current =
       Notifications.addNotificationResponseReceivedListener((response) => {
-        if (lastNotificationResponse) {
-          //console.log(lastNotificationResponse);
-
-          //get the route
-          const route = JSON.stringify(
-            lastNotificationResponse.notification.request.content.data.route
-          );
-          //use some function to return the correct screen by route
-          getFullPath(JSON.parse(route));
+        //code to handle notification response and take user to screens based on the response.data
+        console.log("response", response.notification.request.content.data);
+        if (response.notification.request.content.data.route === "inProgress") {
+          //navigate to the inProgress screen in the AdminStackNavigator
+          setState("admin");
+          //after an interval of 2 seconds navigate to the inProgress screen
+          setTimeout(() => {
+            navigation.navigate("inProgress");
+          }, 1000);
+        } else if (
+          response.notification.request.content.data.route === "inprogress"
+        ) {
+          setState("driver");
+          setTimeout(() => {
+            navigation.navigate("inprogress");
+          }, 1000);
+        } else if (
+          response.notification.request.content.data.route === "sdrides"
+        ) {
+          setState("driver");
+          setTimeout(() => {
+            navigation.navigate("sdrides");
+          }, 1000);
+        } else if (
+          response.notification.request.content.data.route === "rejected"
+        ) {
+          setState("admin");
+          setTimeout(() => {
+            navigation.navigate("rejectedRides");
+          }, 1000);
+        } else if (
+          response.notification.request.content.data.route === "accepted"
+        ) {
+          setState("admin");
+          setTimeout(() => {
+            navigation.navigate("adminRides");
+          }, 1000);
+        } else if (
+          response.notification.request.content.data.route === "completed"
+        ) {
+          setState("admin");
+          setTimeout(() => {
+            navigation.navigate("adminmycomplete");
+          }, 1000);
         }
       });
-  }, [lastNotificationResponse]);
+  }, []);
 
   //get user permission for the notifications
   const registerForPushNotificationsAsync = async () => {
@@ -83,18 +120,4 @@ export default useNotifications = (notificationListener) => {
         Alert.alert("Something went wrong while registering the Notification");
       });
   };
-};
-
-const getFullPath = (route) => {
-  switch (route) {
-    case "inprogress":
-      navigation.navigate("inprogress", {});
-      break;
-    case "inProgress":
-      navigation.navigate("inProgress", {});
-      break;
-    default:
-      navigation.navigate("Home", {});
-      break;
-  }
 };

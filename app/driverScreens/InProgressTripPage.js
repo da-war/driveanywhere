@@ -44,7 +44,7 @@ const InProgressTripPage = ({ navigation, route }) => {
     setLoading(true);
     const data = {
       requestStatus: "completed",
-      completedTime: moment().format("DDDD MMMM YYYY hh:mm:ss a"),
+      completedTime: moment().format("DD MMMM YYYY hh:mm:ss a"),
     };
 
     const docRef = doc(db, "trips", item.docID);

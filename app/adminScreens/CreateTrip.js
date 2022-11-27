@@ -101,7 +101,6 @@ const CreateTrip = ({ navigation }) => {
       AsyncStorage.setItem("drivers", JSON.stringify(drivers));
       setMyDrivers(drivers);
       setDrivers(drivers);
-      setUpdatedList(drivers);
       console.log("Here is drivers", drivers);
 
       setLoading(false);
@@ -199,7 +198,7 @@ const CreateTrip = ({ navigation }) => {
             sound: "default",
             title: "Ride Request",
             body: bodyRequest,
-            data: { data: "goes here" },
+            data: { route: "sdrides", tripId: newId },
           };
           sendNotification(message);
           navigation.navigate("adminHome");
