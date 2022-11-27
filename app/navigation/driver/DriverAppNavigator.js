@@ -14,13 +14,17 @@ import { UserContext } from "../../context/userContext";
 
 import useNotifications from "../../hooks/useNotifications";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import useHandleNotification from "../../hooks/useHandleNotifications";
 const Tab = createBottomTabNavigator();
 
 const DriverAppNavigator = () => {
   const { state, setState } = React.useContext(StateContext);
   const { user, setUser } = React.useContext(UserContext);
 
-  useNotifications();
+  useNotifications((notification) => {
+    console.log("notification", notification);
+    Alert.alert("Notification", "You have a new notification");
+  });
 
   //add token to user in context
   if (state === "driver") {

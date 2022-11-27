@@ -17,7 +17,7 @@ const HomeScreen = () => {
     <>
       <AppScreen>
         <View style={{ flex: 1 }}>
-          <AppHeader icon="car-back" title="Home" />
+          <AppHeader icon="car-back" title="Admin Dashboard" />
           <View style={styles.mainContainer}>
             <ScrollView>
               <View>

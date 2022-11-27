@@ -28,6 +28,7 @@
     "expo-sharing": "~11.0.1",
     "expo-splash-screen": "~0.17.5",
     "expo-status-bar": "~1.4.2",
+    "expo-updates": "~0.15.6",
     "firebase": "9.6.7",
     "formik": "^2.2.9",
     "lottie-react-native": "5.1.4",

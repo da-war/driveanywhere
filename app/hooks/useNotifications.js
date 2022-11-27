@@ -7,39 +7,63 @@ import { doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { Alert } from "react-native";
 
+import navigation from "../navigation/rootNavigation";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
+
 export default useNotifications = (notificationListener) => {
+  const notiResponseListener = React.useRef();
+  const lastNotificationResponse = Notifications.useLastNotificationResponse();
   React.useEffect(() => {
     registerForPushNotificationsAsync();
-    if (notificationListener)
-      Notifications.addNotificationReceivedListener(() => {
-        navigation.navigate("profile");
+
+    notiResponseListener.current =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+        if (lastNotificationResponse) {
+          //console.log(lastNotificationResponse);
+
+          //get the route
+          const route = JSON.stringify(
+            lastNotificationResponse.notification.request.content.data.route
+          );
+          //use some function to return the correct screen by route
+          getFullPath(JSON.parse(route));
+        }
       });
-  }, []);
+  }, [lastNotificationResponse]);
 
   //get user permission for the notifications
   const registerForPushNotificationsAsync = async () => {
     let token;
-    if (Constants.isDevice) {
+    if (Device?.isDevice) {
       const { status: existingStatus } =
         await Notifications.getPermissionsAsync();
       let finalStatus = existingStatus;
       if (existingStatus !== "granted") {
         const { status } = await Notifications.requestPermissionsAsync();
         finalStatus = status;
-        alert("Notification Permission", "You need to allow notifications");
+        Alert.alert(
+          "Notification Permission",
+          "You need to allow notifications"
+        );
       }
       if (finalStatus !== "granted") {
-        alert("Failed to get push token for push notification!");
+        Alert.alert("Failed to get push token for push notification!");
         return;
       }
       token = (await Notifications.getExpoPushTokenAsync()).data;
-      console.log(token);
+      console.log("Expo Token", token);
+      if (token) {
+        await uploadToken(token);
+      }
     } else {
-      alert("Must use physical device for Push Notifications");
-    }
-
-    if (token) {
-      uploadToken(token);
+      Alert.alert("Must use physical device for Push Notifications");
     }
   };
 
@@ -52,10 +76,25 @@ export default useNotifications = (notificationListener) => {
     await updateDoc(docRef, data)
       .then((docRef) => {
         console.log("Document written ");
+        Alert.alert("Token uploaded successfully");
       })
       .catch((error) => {
         console.log(error);
         Alert.alert("Something went wrong while registering the Notification");
       });
   };
+};
+
+const getFullPath = (route) => {
+  switch (route) {
+    case "inprogress":
+      navigation.navigate("inprogress", {});
+      break;
+    case "inProgress":
+      navigation.navigate("inProgress", {});
+      break;
+    default:
+      navigation.navigate("Home", {});
+      break;
+  }
 };

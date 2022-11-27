@@ -21,7 +21,6 @@ const DriversProvider = ({ children }) => {
       AsyncStorage.setItem("drivers", JSON.stringify(drivers));
       setDrivers(drivers);
       console.log("Here is drivers", drivers);
-      setDrivers(drivers);
     } catch (error) {
       console.log(error);
     }

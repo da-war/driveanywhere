@@ -19,32 +19,32 @@ const AdminReports = () => {
 
   const generateExcel = async (tripsEntered) => {
     const headers = [
+      "Trip Id",
       "Driver Name",
       "Driver Email",
       "Driver Phone",
       "Driver Id",
-      "Number of Stays",
       "Pick Up Location",
       "Destination",
       "Date",
       "Time",
-      "Trip Id",
+      "Number of Stays",
       "Completed At:",
     ];
     const mainArray = [];
     //get name, email, phone, id, isDriver from each object in drivers array and store it in an array and push it to mainArray
     tripsEntered.forEach((trip) => {
       const tripsArray = [
+        trip.tripId,
         trip.driver.name,
         trip.driver.email,
         trip.driver.phone,
         trip.driver.id,
-        trip.stays.length,
         trip.arrivalLocation,
         trip.destination,
         trip.date,
         trip.time,
-        trip.tripId,
+        trip.stays.length,
         trip.completedTime,
       ];
       mainArray.push(tripsArray);

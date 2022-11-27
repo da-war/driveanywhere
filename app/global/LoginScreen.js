@@ -38,10 +38,10 @@ function LoginScreen({ navigation }) {
         setLoading(false);
       })
       .catch((error) => {
+        setLoading(false);
         const errorCode = error.code;
         const errorMessage = error.message;
         Alert.alert("Error", errorMessage);
-        setLoading(false);
       });
   };
   return (

@@ -13,8 +13,8 @@ import { DriversProvider } from "./app/context/driversContext";
 import { StateProvider } from "./app/context/StateContext";
 import { TripsProvider } from "./app/context/tripsContext";
 import { InProgressProvider } from "./app/context/InProgressTripsContext";
-import { navigationRef } from "./app/navigation/rootNavigation";
 import { RequestsProvider } from "./app/context/requestsContext";
+import { navigationRef } from "./app/navigation/rootNavigation";
 
 const theme = {
   ...DefaultTheme,

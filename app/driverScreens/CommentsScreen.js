@@ -80,7 +80,7 @@ export function CommentsScreen({ route }) {
             sound: "default",
             title: "Driver Anywhere",
             body: bodyRequest,
-            data: { data: "goes here" },
+            data: { route: "inProgress" },
             _displayInForeground: true,
           };
           sendNotification(message);
@@ -94,7 +94,7 @@ export function CommentsScreen({ route }) {
             sound: "default",
             title: "Driver Anywhere",
             body: bodyRequest,
-            data: { data: "goes here" },
+            data: { route: "inprogress" },
             _displayInForeground: true,
           };
           sendNotification(message);
