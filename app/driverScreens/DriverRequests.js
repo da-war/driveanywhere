@@ -11,15 +11,29 @@ const DriverRequests = () => {
   const navigation = useNavigation();
   const { requests, setRequests } = React.useContext(RequestsContext);
   const [myRequests, setMyRequests] = React.useState(requests);
+  const [loading, setLoading] = React.useState(false);
 
   //get all the requests where status is pending
   //function that returns all the requests where status is pending
 
   React.useEffect(() => {
-    getData();
-    console.log("here is my requests", myRequests);
-    console.log("here is requests", requests);
+    getRequests();
   }, []);
+
+  const getRequests = async () => {
+    setLoading(true);
+    try {
+      const q = query(collection(db, "drequests"));
+      const querySnapshot = await getDocs(q);
+      const requests = querySnapshot.docs.map((doc) => doc.data());
+      setRequests(requests);
+      getData();
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   const getData = () => {
     const myRequests = requests.filter(

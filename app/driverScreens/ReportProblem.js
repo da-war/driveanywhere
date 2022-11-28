@@ -15,6 +15,7 @@ import SubmitButton from "../components/forms/SubmitButton";
 import AppForm from "../components/forms/AppForm";
 import AppScreen from "../components/AppScreen";
 import LottieView from "lottie-react-native";
+import { UserContext } from "../context/userContext";
 
 const initialValues = { title: "", description: "" };
 
@@ -35,6 +36,7 @@ function generateRandomString() {
 
 const ReportProblem = () => {
   const [loading, setLoading] = React.useState(false);
+  const { user, setUser } = React.useContext(UserContext);
   const navigation = useNavigation();
   const handlePress = async (values) => {
     setLoading(true);
@@ -52,6 +54,7 @@ const ReportProblem = () => {
         time,
         docId,
       });
+
       setLoading(false);
       navigation.goBack();
       Alert.alert("Problem Reported to the Admin");
