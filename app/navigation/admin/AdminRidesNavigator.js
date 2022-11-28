@@ -25,8 +25,8 @@ const AdminRidesNavigator = () => {
         },
       }}
     >
-      <TopNav.Screen name="Requested Rides" component={AdminRequestedRides} />
       <TopNav.Screen name="Upcoming Rides" component={AdminUpcomingRides} />
+      <TopNav.Screen name="Requested Rides" component={AdminRequestedRides} />
     </TopNav.Navigator>
   );
 };

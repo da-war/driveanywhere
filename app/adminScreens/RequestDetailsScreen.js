@@ -15,11 +15,14 @@ import { Modal } from "react-native";
 
 import LottieView from "lottie-react-native";
 import { sendNotification } from "../api/expoPushTokens";
+import { getUserAndSendNotification } from "../globalFunctions/global";
+import { AllUsersContext } from "../context/allUsersContext";
 
 const RequestDetailsScreen = ({ route }) => {
   const navigation = useNavigation();
   const data = route.params;
   const [loading, setLoading] = React.useState(false);
+  const { users, setUsers } = React.useContext(AllUsersContext);
 
   useEffect(() => {
     console.log("here is images", data.images);
@@ -37,17 +40,10 @@ const RequestDetailsScreen = ({ route }) => {
         console.log("Document successfully updated!");
         makeDriver();
         if (data.user.token) {
-          const token = data.user.token;
+          const userId = data.user.id;
           const bodyRequest = "Congratulations! Your are now a driver";
-          const message = {
-            to: token,
-            sound: "default",
-            title: "Driver Anywhere",
-            body: bodyRequest,
-            data: { data: "goes here" },
-            _displayInForeground: true,
-          };
-          sendNotification(message);
+          const route = "nowdriver";
+          getUserAndSendNotification(userId, users, bodyRequest, route);
         }
       })
       .catch((error) => {
@@ -85,18 +81,11 @@ const RequestDetailsScreen = ({ route }) => {
       .then(() => {
         setLoading(false);
         Alert.alert("Driver Request Rejected");
-        if (data.user.token) {
-          const token = data.user.token;
+        if (data.user) {
+          const userId = data.user.id;
           const bodyRequest = "We are sorry, your request has been rejected";
-          const message = {
-            to: token,
-            sound: "default",
-            title: "Driver Anywhere",
-            body: bodyRequest,
-            data: { data: "goes here" },
-            _displayInForeground: true,
-          };
-          sendNotification(message);
+          const route = "driverRequest";
+          getUserAndSendNotification(userId, users, bodyRequest, route);
           navigation.goBack();
         }
       })

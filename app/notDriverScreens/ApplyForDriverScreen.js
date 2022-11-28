@@ -18,11 +18,16 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { db, storage } from "../../firebase";
-import { getData, randomString } from "../globalFunctions/global";
+import {
+  getAdminsFromUsersAndSendNotificationToAllAdmins,
+  getData,
+  randomString,
+} from "../globalFunctions/global";
 import { doc, setDoc, updateDoc } from "firebase/firestore";
 import { UserContext } from "../context/userContext";
 import { FONTS } from "../constants/index";
 import moment from "moment";
+import { AllUsersContext } from "../context/allUsersContext";
 const initialItems = { images: [], description: "" };
 
 const validationSchema = yup.object().shape({
@@ -36,7 +41,19 @@ const ApplyForDriverScreen = () => {
   const [modalVisible, setModalVisible] = React.useState(false);
   const [urls, setUrls] = React.useState([]);
   const { user, setUser } = React.useContext(UserContext);
+  const { users, setUsers } = React.useContext(AllUsersContext);
+  const [admins, setAdmins] = React.useState([]);
   const [myDescription, setMyDescription] = React.useState("");
+
+  React.useEffect(() => {
+    //get users from users array where isAdmin is true
+    getAdmins();
+  }, []);
+
+  const getAdmins = () => {
+    const admins = users.filter((user) => user.isAdmin === true);
+    setAdmins(admins);
+  };
 
   const handleSubmit = async (values) => {
     setProgress(0);
@@ -117,8 +134,17 @@ const ApplyForDriverScreen = () => {
         updateDoc(docRef, data)
           .then((docRef) => {
             Alert.alert("Request Sent to the admin");
+
             getData(setUser);
             setModalVisible(false);
+            const bodyRequest =
+              "You have a new driver request from " + user.name;
+            const route = "driverRequest";
+            getAdminsFromUsersAndSendNotificationToAllAdmins(
+              admins,
+              bodyRequest,
+              route
+            );
             navigation.goBack();
           })
           .catch((error) => {

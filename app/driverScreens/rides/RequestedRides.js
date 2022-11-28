@@ -21,6 +21,8 @@ import { useNavigation } from "@react-navigation/native";
 import LottieView from "lottie-react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { sendNotification } from "../../api/expoPushTokens";
+import { AllUsersContext } from "../../context/allUsersContext";
+import { getUserAndSendNotification } from "../../globalFunctions/global";
 
 const RequestedRides = () => {
   const { trips, setTrips } = React.useContext(TripsContext);
@@ -28,6 +30,7 @@ const RequestedRides = () => {
   const [requested, setRequested] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [length, setLength] = React.useState(0);
+  const { users, setUsers } = React.useContext(AllUsersContext);
 
   const navigation = useNavigation();
 
@@ -68,15 +71,8 @@ const RequestedRides = () => {
           const token = item.admin.token;
           const tripId = item.tripId;
           const bodyRequest = "Driver Accepted to trip: Trip ID: " + tripId;
-          const message = {
-            to: token,
-            sound: "default",
-            title: "Driver Anywhere",
-            body: bodyRequest,
-            data: { route: "accepted" },
-            _displayInForeground: true,
-          };
-          sendNotification(message);
+          const route = "active";
+          getUserAndSendNotification(item.admin.id, users, bodyRequest, route);
         }
         navigation.navigate("Upcoming");
         setLoading(false);
@@ -101,15 +97,8 @@ const RequestedRides = () => {
           const token = item.admin.token;
           const tripId = item.tripId;
           const bodyRequest = "Driver Rejected trip: Trip ID: " + tripId;
-          const message = {
-            to: token,
-            sound: "default",
-            title: "Driver Anywhere",
-            body: bodyRequest,
-            data: { route: "rejected" },
-            _displayInForeground: true,
-          };
-          sendNotification(message);
+          const route = "rejected";
+          getUserAndSendNotification(item.admin.id, users, bodyRequest, route);
         }
         setLoading(false);
         getTrips();
@@ -186,7 +175,7 @@ const RequestedRides = () => {
               <View style={styles.listContainer}>
                 <FlatList
                   data={requested}
-                  keyExtractor={(item) => item.currentTime.toString()}
+                  keyExtractor={(item) => item.docID.toString()}
                   ItemSeparatorComponent={() => (
                     <View
                       style={{

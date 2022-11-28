@@ -59,16 +59,15 @@ const CompletedRides = () => {
           </View>
           <ScrollView>
             <Text style={styles.text}>Completed Rides</Text>
-            <FlatList
-              data={ridesData}
-              keyExtractor={(item) => item.docID.toString()}
-              renderItem={({ item }) => (
+
+            {ridesData.map((item, index) => (
+              <View key={index}>
                 <Ccard
                   rideNumber={item.tripId}
                   onPress={() => navigation.navigate("completedDetails", item)}
                 />
-              )}
-            />
+              </View>
+            ))}
           </ScrollView>
         </View>
       )}

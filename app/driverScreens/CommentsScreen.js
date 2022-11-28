@@ -21,6 +21,8 @@ import LottieView from "lottie-react-native";
 import moment from "moment";
 import { sendNotification } from "../api/expoPushTokens";
 import { ScrollView } from "react-native";
+import { getUserAndSendNotification } from "../globalFunctions/global";
+import { AllUsersContext } from "../context/allUsersContext";
 
 export function CommentsScreen({ route }) {
   const data = route.params;
@@ -29,6 +31,7 @@ export function CommentsScreen({ route }) {
   const navigation = useNavigation();
   const { trips, setTrips } = React.useContext(TripsContext);
   const { user, setUser } = React.useContext(UserContext);
+  const { users, setUsers } = React.useContext(AllUsersContext);
   const [newMessage, setNewMessage] = useState("");
   const docID = data.docID;
   const comment = data.comments;
@@ -71,33 +74,19 @@ export function CommentsScreen({ route }) {
       messages: newMessages,
     })
       .then((docRef) => {
-        if (data.admin.token) {
-          const token = data.admin.token;
+        if (data.admin) {
+          const adminId = data.adminId;
           const tripId = data.tripId;
           const bodyRequest = "Comments UPDATE in Ride#: " + tripId;
-          const message = {
-            to: token,
-            sound: "default",
-            title: "Drive Anywhere",
-            body: bodyRequest,
-            data: { route: "inProgress" },
-            _displayInForeground: true,
-          };
-          sendNotification(message);
+          const route = "inProgress";
+          getUserAndSendNotification(adminId, users, bodyRequest, route);
         }
-        if (data.driver.token) {
-          const token = data.driver.token;
+        if (data.driver) {
+          const driverId = data.driverId;
           const tripId = data.tripId;
           const bodyRequest = "Comments UPDATE in Ride#: " + tripId;
-          const message = {
-            to: token,
-            sound: "default",
-            title: "Drive Anywhere",
-            body: bodyRequest,
-            data: { route: "inprogress" },
-            _displayInForeground: true,
-          };
-          sendNotification(message);
+          const route = "inprogress";
+          getUserAndSendNotification(driverId, users, bodyRequest, route);
         }
         //update the state
         getComments();

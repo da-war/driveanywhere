@@ -36,6 +36,7 @@ import { TripsContext } from "../context/tripsContext";
 import {
   getDate,
   getTime,
+  getUserAndSendNotification,
   showRideSendNotification,
 } from "../globalFunctions/global";
 import AppFormDatePicker from "../components/forms/AppFormDatePicker";
@@ -43,6 +44,7 @@ import AppFormTimePicker from "../components/forms/AppFormTimePicker";
 import moment from "moment";
 import { expoPushyNotification } from "../globalFunctions/notifications";
 import { sendNotification } from "../api/expoPushTokens";
+import { AllUsersContext } from "../context/allUsersContext";
 
 const initialValues = {
   arrivalLocation: "",
@@ -75,9 +77,12 @@ const CreateTrip = ({ navigation }) => {
   const { trips, setTrips } = React.useContext(TripsContext);
 
   const { drivers, setDrivers } = React.useContext(DriversContext);
+  const { users, setUsers } = React.useContext(AllUsersContext);
   React.useEffect(() => {
     getData();
-    console.log("Context Drivers", drivers);
+    setTimeout(() => {
+      console.log("Driverrrrrrrrrrssssssss", users);
+    }, 2000);
   }, []);
 
   const getData = async () => {
@@ -140,6 +145,7 @@ const CreateTrip = ({ navigation }) => {
       const date = getDate(values.date);
       const time = getTime(values.time);
       const admin = user;
+      const adminId = user.id;
       const driver = values.driver;
       const driverId = driver.id;
       const docID = randomString(35);
@@ -148,12 +154,13 @@ const CreateTrip = ({ navigation }) => {
       const comments = randomString(37);
       const stays = [];
       //currentTime
-      const currentTime = moment().format("YYYY-MM-DD HH:mm:ss a");
+      const assignedTripAt = moment().format("YYYY-MM-DD HH:mm:ss a");
       const requestStatus = "pending";
 
       const data = {
         arrivalLocation,
         admin,
+        adminId,
         passengerName,
         passengerPhone,
         destination,
@@ -162,7 +169,7 @@ const CreateTrip = ({ navigation }) => {
         docID,
         driver,
         driverId,
-        currentTime,
+        assignedTripAt,
         requestStatus,
         startTime,
         stays,
@@ -170,10 +177,7 @@ const CreateTrip = ({ navigation }) => {
         comments,
         adminId: auth.currentUser.uid,
         tripId: newId,
-        adminData: user,
       };
-      console.log(data);
-
       //add all in firestore version 9 collection of trips
       setDoc(doc(db, "trips", docID), data)
         .then(() => {
@@ -189,18 +193,12 @@ const CreateTrip = ({ navigation }) => {
             ],
           });
           setTrips([...myData, trips]);
-          console.log("hehehehehehehehhehehehehehehehhehehehehe", trips);
           Alert.alert("Success", "Trip Assigned Successfully");
           showRideSendNotification();
           const bodyRequest = "You received a ride request Trip ID: " + newId;
-          const message = {
-            to: data.driver.token,
-            sound: "default",
-            title: "Ride Request",
-            body: bodyRequest,
-            data: { route: "sdrides", tripId: newId },
-          };
-          sendNotification(message);
+          const route = "sdrides";
+          //function from global.js that sends notification to user
+          getUserAndSendNotification(data.driverId, users, bodyRequest, route);
           navigation.navigate("adminHome");
         })
         .catch((error) => {

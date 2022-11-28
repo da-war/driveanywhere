@@ -24,8 +24,12 @@ import LottieView from "lottie-react-native";
 import { TripsContext } from "../context/tripsContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
-import { rideCompletedNotification } from "../globalFunctions/global";
+import {
+  getUserAndSendNotification,
+  rideCompletedNotification,
+} from "../globalFunctions/global";
 import { sendNotification } from "../api/expoPushTokens";
+import { AllUsersContext } from "../context/allUsersContext";
 
 const PendingDetailsScreen = ({ navigation, route }) => {
   const [loading, setLoading] = React.useState(false);
@@ -33,6 +37,7 @@ const PendingDetailsScreen = ({ navigation, route }) => {
   const data = route.params;
   const myNavigation = useNavigation();
   const { trips, setTrips } = React.useContext(TripsContext);
+  const { users, setUsers } = React.useContext(AllUsersContext);
 
   //with Linking call the phone number
   const handleCallAdmin = () => {
@@ -51,22 +56,15 @@ const PendingDetailsScreen = ({ navigation, route }) => {
     updateDoc(docRef, data)
       .then((docRef) => {
         console.log("Value of an Existing Document Field has been updated");
-        getTripsp();
+        getTrips();
         setLoading(false);
         Alert.alert("Ride Cancelled");
         if (item.driver.token) {
-          const token = item.driver.token;
+          const driverId = item.driverId;
           const tripId = item.tripId;
           const bodyRequest = "Trip canclled :Trip# " + tripId;
-          const message = {
-            to: token,
-            sound: "default",
-            title: "Driver Anywhere",
-            body: bodyRequest,
-            data: { data: "goes here" },
-            _displayInForeground: true,
-          };
-          sendNotification(message);
+          const route = "driverCancelTrip";
+          getUserAndSendNotification(driverId, users, bodyRequest, route);
         }
         setIsCompleted(true);
       })

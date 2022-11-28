@@ -12,7 +12,6 @@ const AdminRides = () => {
   return (
     <AppScreen>
       <AppHeader title="App Rides" onPress={() => navigation.goBack()} />
-
       <View style={{ flex: 1 }}>
         <AdminRidesNavigator />
       </View>

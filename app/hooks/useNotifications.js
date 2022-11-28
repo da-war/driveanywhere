@@ -9,6 +9,7 @@ import { Alert } from "react-native";
 
 import navigation from "../navigation/rootNavigation";
 import { StateContext } from "../context/StateContext";
+import { UserContext } from "../context/userContext";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -29,48 +30,76 @@ export default useNotifications = (notificationListener) => {
       Notifications.addNotificationResponseReceivedListener((response) => {
         //code to handle notification response and take user to screens based on the response.data
         console.log("response", response.notification.request.content.data);
+
         if (response.notification.request.content.data.route === "inProgress") {
-          //navigate to the inProgress screen in the AdminStackNavigator
           setState("admin");
-          //after an interval of 2 seconds navigate to the inProgress screen
           setTimeout(() => {
             navigation.navigate("inProgress");
-          }, 1000);
+          }, 700);
         } else if (
           response.notification.request.content.data.route === "inprogress"
         ) {
           setState("driver");
           setTimeout(() => {
             navigation.navigate("inprogress");
-          }, 1000);
+          }, 700);
         } else if (
           response.notification.request.content.data.route === "sdrides"
         ) {
           setState("driver");
           setTimeout(() => {
             navigation.navigate("sdrides");
-          }, 1000);
+          }, 700);
         } else if (
           response.notification.request.content.data.route === "rejected"
         ) {
           setState("admin");
           setTimeout(() => {
             navigation.navigate("rejectedRides");
-          }, 1000);
+          }, 700);
         } else if (
           response.notification.request.content.data.route === "accepted"
         ) {
           setState("admin");
           setTimeout(() => {
             navigation.navigate("adminRides");
-          }, 1000);
+          }, 700);
         } else if (
           response.notification.request.content.data.route === "completed"
         ) {
           setState("admin");
           setTimeout(() => {
             navigation.navigate("adminmycomplete");
-          }, 1000);
+          }, 700);
+        } else if (
+          response.notification.request.content.data.route === "active"
+        ) {
+          setState("admin");
+          setTimeout(() => {
+            navigation.navigate("adminRides");
+          }, 700);
+        } else if (
+          response.notification.request.content.data.route ===
+          "driverCancelTrip"
+        ) {
+          setState("driver");
+          setTimeout(() => {
+            navigation.navigate("canceledrides");
+          }, 700);
+        } else if (
+          response.notification.request.content.data.route === "driverRequest"
+        ) {
+          setState("admin");
+          setTimeout(() => {
+            navigation.navigate("driverrequests");
+          }, 700);
+        } else if (
+          response.notification.request.content.data.route === "nowdriver"
+        ) {
+          setState("driver");
+          setTimeout(() => {
+            navigation.navigate("sdhome");
+          }, 700);
         }
       });
   }, []);

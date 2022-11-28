@@ -45,6 +45,7 @@ const AdminReports = () => {
         trip.date,
         trip.time,
         trip.stays.length,
+        trip.startTime,
         trip.completedTime,
       ];
       mainArray.push(tripsArray);

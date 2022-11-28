@@ -24,8 +24,12 @@ import LottieView from "lottie-react-native";
 import { TripsContext } from "../context/tripsContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import moment from "moment";
-import { rideCompletedNotification } from "../globalFunctions/global";
+import {
+  getUserAndSendNotification,
+  rideCompletedNotification,
+} from "../globalFunctions/global";
 import { sendNotification } from "../api/expoPushTokens";
+import { AllUsersContext } from "../context/allUsersContext";
 
 const InProgressTripPage = ({ navigation, route }) => {
   const [loading, setLoading] = React.useState(false);
@@ -33,6 +37,7 @@ const InProgressTripPage = ({ navigation, route }) => {
   const data = route.params;
   const myNavigation = useNavigation();
   const { trips, setTrips } = React.useContext(TripsContext);
+  const { users, setUsers } = React.useContext(AllUsersContext);
 
   //with Linking call the phone number
   const handleCallAdmin = () => {
@@ -55,19 +60,12 @@ const InProgressTripPage = ({ navigation, route }) => {
         setLoading(false);
         Alert.alert("Ride Complete");
         if (item.admin.token) {
-          const token = item.admin.token;
+          const adminId = item.adminId;
           const tripId = item.tripId;
           const bodyRequest =
             "Driver marked trip as completed: Trip ID: " + tripId;
-          const message = {
-            to: token,
-            sound: "default",
-            title: "Driver Anywhere",
-            body: bodyRequest,
-            data: { data: "goes here" },
-            _displayInForeground: true,
-          };
-          sendNotification(message);
+          const route = "completed";
+          getUserAndSendNotification(adminId, users, bodyRequest, route);
         }
         rideCompletedNotification();
         setIsCompleted(true);

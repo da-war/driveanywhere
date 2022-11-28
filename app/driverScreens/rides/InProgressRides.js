@@ -103,7 +103,7 @@ const InProgressRides = () => {
           <View style={styles.listContainer}>
             <FlatList
               data={inProgress}
-              keyExtractor={(item) => item.currentTime.toString()}
+              keyExtractor={(item) => item.docID.toString()}
               renderItem={({ item }) => (
                 <UpcomingCard
                   arrivalLocation={item.arrivalLocation}

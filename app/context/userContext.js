@@ -11,6 +11,7 @@ const UserProvider = ({ children }) => {
 
   React.useEffect(() => {
     getData();
+    console.log(user);
   }, []);
 
   const getData = async () => {

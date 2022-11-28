@@ -24,12 +24,16 @@ import { sendNotification } from "../api/expoPushTokens";
 import { Modal } from "react-native";
 
 import LottieView from "lottie-react-native";
+import { AllUsersContext } from "../context/allUsersContext";
+import { getUserAndSendNotification } from "../globalFunctions/global";
+import moment from "moment";
 
 const UpcomingDetailsScreen = ({ navigation, route }) => {
   const data = route.params;
   const myNavigation = useNavigation();
 
   const { user, setUser } = React.useContext(UserContext);
+  const { users, setUsers } = React.useContext(AllUsersContext);
 
   const { trips, setTrips } = React.useContext(TripsContext);
   const [loading, setLoading] = React.useState(false);
@@ -54,26 +58,19 @@ const UpcomingDetailsScreen = ({ navigation, route }) => {
     setLoading(true);
     const newData = {
       requestStatus: "inprogress",
+      startTime: moment().format("DD MMMM YYYY hh:mm:ss a"),
     };
     const docRef = doc(db, "trips", myData.docID);
     updateDoc(docRef, newData)
       .then((docRef) => {
-        console.log("Value of an Existing Document Field has been updated");
         Alert.alert("Trip Started");
         getTrips();
-        if (myData.admin.token) {
-          const token = myData.admin.token;
+        if (myData.admin) {
+          const adminId = myData.adminId;
           const tripId = myData.tripId;
           const bodyRequest = "Driver started trip: Trip ID: " + tripId;
-          const message = {
-            to: token,
-            sound: "default",
-            title: "Driver Anywhere",
-            body: bodyRequest,
-            data: { data: "goes here" },
-            _displayInForeground: true,
-          };
-          sendNotification(message);
+          const route = "inProgress";
+          getUserAndSendNotification(adminId, users, bodyRequest, route);
         }
         setLoading(false);
         Alert.alert("Trip Started");

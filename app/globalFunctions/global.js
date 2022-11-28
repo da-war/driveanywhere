@@ -3,6 +3,7 @@ import * as Notifications from "expo-notifications";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import moment from "moment";
+import { sendNotification } from "../api/expoPushTokens";
 
 export const showRideSendNotification = () => {
   Notifications.scheduleNotificationAsync({
@@ -64,4 +65,48 @@ export const getTime = (date) => {
 //function that takes a date as input and returns the date in format dddd, MMMM Do YYYY
 export const getDate = (date) => {
   return moment(date).format("dddd, MMMM Do YYYY");
+};
+
+//function to get the value of token field from a doc where the id is the same as inpu
+export const getUserAndSendNotification = async (
+  id,
+  users = [],
+  bodyRequest,
+  route
+) => {
+  //find the user with the id in the users array and get the token
+  const user = users.find((user) => user.id === id);
+  const token = user.token;
+  console.log("tokennnnnnnnnnnnnnnnnnnnnnnnn", token);
+  //send notification to the user
+  const message = {
+    to: token,
+    sound: "default",
+    title: "Ride Request",
+    body: bodyRequest,
+    data: { route: route },
+  };
+
+  sendNotification(message);
+};
+
+export const getAdminsFromUsersAndSendNotificationToAllAdmins = (
+  admins,
+  bodyRequest,
+  route
+) => {
+  admins.forEach((admin) => {
+    const token = admin.token;
+    console.log("tokennnnnnnnnnnnnnnnnnnnnnnnn", token);
+    //send notification to the user
+    const message = {
+      to: token,
+      sound: "default",
+      title: "Ride Request",
+      body: bodyRequest,
+      data: { route: route },
+    };
+
+    sendNotification(message);
+  });
 };

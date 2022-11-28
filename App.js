@@ -15,6 +15,7 @@ import { TripsProvider } from "./app/context/tripsContext";
 import { InProgressProvider } from "./app/context/InProgressTripsContext";
 import { RequestsProvider } from "./app/context/requestsContext";
 import { navigationRef } from "./app/navigation/rootNavigation";
+import { AllUsersProvider } from "./app/context/allUsersContext";
 
 const theme = {
   ...DefaultTheme,
@@ -58,11 +59,13 @@ export default function App() {
           <DriversProvider>
             <TripsProvider>
               <RequestsProvider>
-                <InProgressProvider>
-                  <NavigationContainer ref={navigationRef} theme={theme}>
-                    <DriverAppNavigator />
-                  </NavigationContainer>
-                </InProgressProvider>
+                <AllUsersProvider>
+                  <InProgressProvider>
+                    <NavigationContainer ref={navigationRef} theme={theme}>
+                      <DriverAppNavigator />
+                    </NavigationContainer>
+                  </InProgressProvider>
+                </AllUsersProvider>
               </RequestsProvider>
             </TripsProvider>
           </DriversProvider>

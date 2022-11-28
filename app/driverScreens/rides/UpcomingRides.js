@@ -91,7 +91,7 @@ const UpcomingRides = () => {
           <View style={styles.listContainer}>
             <FlatList
               data={requested}
-              keyExtractor={(item) => item.currentTime.toString()}
+              keyExtractor={(item) => item.docID.toString()}
               renderItem={({ item }) => (
                 <UpcomingCard
                   arrivalLocation={item.arrivalLocation}

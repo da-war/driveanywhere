@@ -10,5 +10,12 @@ npm-debug.*
 *.orig.*
 web-build/
 
+//add google service file from the root of your project
+google-services.json
+firebase.json
+
+//add Fcard file from components folder
+
+
 # macOS
 .DS_Store
